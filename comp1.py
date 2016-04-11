@@ -45,7 +45,7 @@
 
 # ## Premenné
 
-# In[11]:
+# In[4]:
 
 # toto je komentar, pre istotu nepiseme s diakritikou
 # pre vyhodnotenie bunky stlacte Shift+Enter
@@ -53,16 +53,22 @@ a = 5
 type(a)
 
 
-# In[4]:
+# In[5]:
+
+float
+
+
+# In[6]:
 
 # typ premennej je automaticky uhadnuty
 b = 0.2
 type(b)
 
 
-# In[12]:
+# In[7]:
 
 print(a)    # vsimnite si zatvorky okolo! Novinka v Python3
+a=1
 print(a/2)
 print(a//2) # celociselne delenie
 print(a%2)  # zvysok po deleni
@@ -75,12 +81,13 @@ a+b    # scitanie
 
 # In[9]:
 
-b**a   # umocnenie
+b=3
+b**2   # umocnenie
 
 
 # ## Strings
 
-# In[6]:
+# In[15]:
 
 c = "abc"
 type(c)
@@ -88,7 +95,7 @@ type(c)
 
 # Jednotlivé stringy možno meniť na čísla, *float* alebo *int*.
 
-# In[21]:
+# In[17]:
 
 s = "123"
 si = int(s)
@@ -108,9 +115,10 @@ print(ds + "_" + "s")
 
 # O stringoch viac pozajtra (3. deň). Dnes spomeňme, že ich možno ľahko premeniť na pole:
 
-# In[25]:
+# In[18]:
 
 s = "123"
+print(len(s))
 list(s)
 
 
@@ -120,7 +128,7 @@ list(s)
 # Okrem toho existuje *tuple*, ktorý sú nemenný, napr. `a = (1, 2, 3)`
 # 
 
-# In[35]:
+# In[20]:
 
 a = [1, 2, 3]
 print(a)
@@ -132,18 +140,19 @@ print(a + b)
 
 # Prístup k prvkom:
 
-# In[37]:
+# In[22]:
 
 print(a[0])   # prvy element, cislovanie zacina nulou!
 print(a[-1])  # posledny element
 #a[3]   # Error: list index out of range
 a[0] = 5
 print(a)      # prvy element zmeneny
+print(a[10])
 
 
 # Rôzne operácie:
 
-# In[32]:
+# In[26]:
 
 # dlzka listov
 print(len(a))
@@ -157,20 +166,23 @@ print(a)
 
 # Listy možno usporiadať.
 
-# In[44]:
+# In[33]:
 
 v = [5, 3, 8, 1]
 print(v)
 v.sort()
+for i in reversed(v):
+    print(i)
 print(v)
 
 
-# In[56]:
+# In[35]:
 
 # specificke listy
 r = range(10)
 print(r)
-print(list(r))
+r = list(r)
+print(r)
 print(len(r), sum(r))
 
 # rozne ine moznosti, vseobecna struktura
@@ -178,6 +190,14 @@ print(len(r), sum(r))
 print(list(range(1,10,2)))
 print(list(range(10,1)))    # prazdny list
 print(list(range(10,1,-1)))
+
+
+# In[39]:
+
+a=range(5)
+print(a)
+a[2]
+print(type(a))
 
 
 # Krátko o tuploch.
@@ -198,7 +218,7 @@ for i in range(10):
     print(i**2)
 
 
-# In[72]:
+# In[45]:
 
 for i in "abc":   # tlacit mozno aj stringy
     print(i)
@@ -212,14 +232,15 @@ for i in "abc":   # tlacit mozno aj stringy
 # ## List comprehension
 # Zjednodušený for cyklus v Pythone na jeden riadok, veľmi užitočná vec.
 
-# In[84]:
+# In[43]:
 
-a = [i for i in range(10)]
+a = [print(i**2) for i in range(10)]
 print(a)
 b = [i*i for i in range(10)]
 print(b)
 A = [[i+j for i in range(5)] for j in range(5)]   # matica (list listov), len nie pekne zapisana
 print(A)
+print(np.array(A))
 A[1][3]   # pristup k jednotlivym prvkom matice
 
 
@@ -240,13 +261,14 @@ print(plus(1, 2))
 print(plus(3.2, -1))
 
 
-# In[22]:
+# In[48]:
 
 # vo funkcii mozu byt defautlne premenne
 def plus2(a, b=2):
     return a + b
 
-plus2(7)
+print(plus2(7))
+print(plus2(7,4))
 
 
 # In[15]:
@@ -270,15 +292,16 @@ b = 234
 
 # ***
 # ## [Problem]
-# V Prima Banke ponúkajú vklad s 5% úrokom. Ak budete počas jedného roka každý mesiac vkladať 50 eur, na konci mesiaca vám pribudne 5% z celkovej sumy, ktorú v tom čase máte na účte. Koľko eur na konci roka zarobíte?
+# V Prima Banke ponúkajú vklad s 5% ročným úrokom. Ak budete počas jedného roka každý mesiac vkladať 50 eur, na konci mesiaca vám pribudne 5% per annum z celkovej sumy, ktorú v tom čase máte na účte. Koľko eur na konci roka zarobíte?
 # ***
 
 # ## Komplexné čísla
 
-# In[53]:
+# In[49]:
 
 z = 1 + 2j
 print(z)
+print(type(z))
 
 
 # In[54]:
@@ -291,15 +314,23 @@ z*z
 z.conjugate()
 
 
-# In[56]:
+# In[50]:
 
 print(z.real)
 print(z.imag)
 
 
+# In[69]:
+
+from math import sqrt
+sqrt((z*z.conjugate()).real)
+abs(z)
+np.angle(z)
+
+
 # ## Podmienky
 
-# In[ ]:
+# In[71]:
 
 a = 5
 if a == 2:
@@ -323,6 +354,36 @@ else:
 # Napíšte funkciu, ktorá mi rozhodne, či je dané číslo prvočíslo.
 # 
 # Nájdite súčet všetkých prvočísel do 100.
+
+# In[76]:
+
+# Problem 1
+a = 1987
+print([i for i in str(a)])
+print(sum([int(i) for i in str(a)]))
+
+
+# In[77]:
+
+# Problem 2
+sum([i for i in range(101) if i%3 == 0 or i%5 == 0])
+
+
+# In[2]:
+
+# Problem 3
+def isprime(n):
+    for i in range(2, n//2+1):
+        if n%i == 0:
+            return False
+    return True
+
+
+# In[4]:
+
+print([i for i in range(2, 101) if isprime(i)])
+sum([i for i in range(2, 101) if isprime(i)])
+
 
 # In[ ]:
 
